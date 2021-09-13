@@ -592,7 +592,7 @@ Transactions current;
                             currencyType: omni.currencyPower);
                         setState(() {
                           omni.updateHistory(current);
-                          omni.player1.balance = omni.player2.balance - giftCardInput;
+                          omni.player2.balance = omni.player2.balance - giftCardInput;
                           debugPrint("${omni.player2.balance}");
                           omni.updatePlayer2Passbook(current);
                           giftCardInput = 0;

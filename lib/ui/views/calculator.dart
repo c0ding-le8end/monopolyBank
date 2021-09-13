@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoly_bank/model/Omnipotent%20data.dart';
 import 'package:monopoly_bank/model/transactions.dart';
+import 'package:monopoly_bank/ui/endgame.dart';
 import 'package:monopoly_bank/ui/views/transactionHistory.dart';
 import 'package:monopoly_bank/util/global%20variables.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -11,9 +12,10 @@ import '../giftCard.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({
-    Key key, this.draggableWidget,
+    Key key, this.draggableWidget, this.gameId,
   }) : super(key: key);
 final draggableWidget;
+final gameId;
   @override
   _CalculatorState createState() => _CalculatorState();
 }
@@ -869,7 +871,7 @@ class _CalculatorState extends State<Calculator>
                             amount: omni.input,
                             currencyType: omni.currencyPower);
                         setState(() {
-                          omni.history.history.add(current);
+                          omni.updateHistory(current);
                           omni.player2.balance = omni.currencyPower == 'M'
                               ? omni.player2.balance + double.parse(omni.input)
                               : omni.player2.balance +
@@ -879,7 +881,7 @@ class _CalculatorState extends State<Calculator>
                           omni.updatePlayer2Passbook(current);
                           omni.input = "";
                           omni.currencyPower = '';
-                          omni.updateHistory(current);
+                          omni.player2.status=0;
                           omni.previousSelectedPlayer = "";
                           omni.pointStatus = false;
                           omni.collector = "";

@@ -1,14 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoly_bank/model/Omnipotent%20data.dart';
+import 'package:monopoly_bank/ui/homePage.dart';
 import 'package:monopoly_bank/ui/tabBarView.dart';
 import 'package:monopoly_bank/ui/views/calculator.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 
-void main() {
-
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(ChangeNotifierProvider(create: (context)=>Omni(),child: MyApp(),));
 }
+
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -20,9 +25,10 @@ class MyApp extends StatelessWidget {
     return OverlaySupport.global(
       child: MaterialApp(
         title: 'Flutter Demo',
-        home: TabBarList(),
-      ),
-    );
+        home: HomePage(),routes: <String, WidgetBuilder>{
+    "HomePage": (BuildContext context) => HomePage()})
+      );
+
   }
 }
 

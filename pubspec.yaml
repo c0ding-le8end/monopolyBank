@@ -32,6 +32,10 @@ dependencies:
   overlay_support: ^1.2.1
   extended_tabs: ^2.3.0
   provider: ^6.0.0
+  firebase_core: ^0.5.3
+  firebase: ^8.0.0
+  cloud_firestore: ^0.14.4
+  font_awesome_flutter: ^9.0.0
 
 
 dev_dependencies:
