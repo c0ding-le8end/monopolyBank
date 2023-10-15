@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class GiftCard extends StatefulWidget {
 const  GiftCard(
-      {Key key,
+      {Key? key,
       })
       : super(key: key);
 
@@ -23,11 +23,11 @@ const  GiftCard(
 
 class _GiftCardState extends State<GiftCard> {
   double giftCardInput = 0;
-  List<RaisedButton> giftCardRow1;
-  List<RaisedButton> giftCardRow2;
-  List<RaisedButton> giftCardRow3;
-  List giftCardRow4;
-Transactions current;
+  late List<ElevatedButton> giftCardRow1;
+  late List<ElevatedButton> giftCardRow2;
+  late List<ElevatedButton> giftCardRow3;
+  late List giftCardRow4;
+late Transactions current;
 
   @override
   Widget build(BuildContext context) {
@@ -73,41 +73,43 @@ Transactions current;
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0, left: 10),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: List.generate(
-                            3,
-                                (index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: giftCardRow1[index],
-                            )),
-                      ),
-                      Row(
-                        children: List.generate(
-                            3,
-                                (index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: giftCardRow2[index],
-                            )),
-                      ),
-                      Row(
-                        children: List.generate(
-                            3,
-                                (index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: giftCardRow3[index],
-                            )),
-                      ),
-                      Row(
-                        children: List.generate(
-                            3,
-                                (index) => Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: giftCardRow4[index],
-                            )),
-                      )
-                    ],
+                  child: FittedBox(
+                    child: Column(
+                      children: [
+                        Row(
+                          children: List.generate(
+                              3,
+                                  (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(width:90,height:45,child: giftCardRow1[index]),
+                              )),
+                        ),
+                        Row(
+                          children: List.generate(
+                              3,
+                                  (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(width:90,height:45,child: giftCardRow2[index]),
+                              )),
+                        ),
+                        Row(
+                          children: List.generate(
+                              3,
+                                  (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(width:90,height:45,child: giftCardRow3[index]),
+                              )),
+                        ),
+                        Row(
+                          children: List.generate(
+                              3,
+                                  (index) => Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(width:90,height:45,child:giftCardRow4[index]),
+                              )),
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -119,8 +121,10 @@ Transactions current;
 
   createRow(BuildContext context, Omni omni) {
     giftCardRow1 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: (() {
           current = Transactions(payer: "Bank", amount: "1", currencyType: "M");
           omni.currencyPower = "M";
@@ -133,8 +137,11 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+          
+        ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "M");
           omni.currencyPower = "M";
@@ -147,8 +154,10 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current =
               Transactions(payer: "Bank", amount: "1.5", currencyType: "M");
@@ -164,8 +173,10 @@ Transactions current;
       ),
     ];
     giftCardRow2 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current =
               Transactions(payer: "Bank", amount: "100", currencyType: "K");
@@ -179,8 +190,10 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "K");
           omni.currencyPower = "K";
@@ -193,8 +206,10 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "K");
           omni.currencyPower = "K";
@@ -209,8 +224,10 @@ Transactions current;
       ),
     ];
     giftCardRow3 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+    style: ElevatedButton.styleFrom(
+    backgroundColor: Color(0xFFBFDBAE),
+    ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "K");
           omni.currencyPower = "K";
@@ -223,8 +240,10 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "K");
           omni.currencyPower = "K";
@@ -237,8 +256,10 @@ Transactions current;
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: () {
           current = Transactions(payer: "Bank", amount: "2", currencyType: "K");
           omni.currencyPower = "K";
@@ -258,8 +279,10 @@ Transactions current;
           omni.player3.status +
           omni.player4.status !=
           1 )?false:true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFBFDBAE),
+            ),
             onPressed: (giftCardInput==0)
                 ? () {
               showSimpleNotification(Center(
@@ -375,8 +398,10 @@ Transactions current;
           omni.player3.status +
           omni.player4.status !=
           2 )?false:true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFBFDBAE),
+            ),
 
             onPressed: (giftCardInput==0)
                 ? () {
@@ -550,8 +575,10 @@ Transactions current;
           omni.player3.status +
           omni.player4.status !=
           1 )?false:true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFFBFDBAE),
+            ),
             onPressed: (giftCardInput==0)
                 ? () {
               showSimpleNotification(Center(

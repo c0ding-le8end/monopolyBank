@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class TransactionHistory extends StatefulWidget {
  const TransactionHistory(
-      {Key key, this.draggableWidget})
+      {Key? key, this.draggableWidget})
       : super(key: key);
 
   final draggableWidget;
@@ -106,7 +106,7 @@ class _TransactionHistoryState extends State<TransactionHistory> {
     ),);
   }
 
-  DecorationImage buildDecorationImage() {
+  DecorationImage? buildDecorationImage() {
     if (widget.draggableWidget == 1)
       return null;
     else

@@ -4,7 +4,7 @@ class Account
 {
   String name;
 
-  Account({this.name, this.status, this.balance});
+  Account({required this.name,required this.status,required this.balance});
 
   int status;
   double balance;

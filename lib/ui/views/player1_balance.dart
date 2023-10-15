@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import '../endDialog.dart';
 
 class FirstPlayerBalance extends StatefulWidget {
-  const FirstPlayerBalance({Key key,this.creator}) : super(key: key);
+  const FirstPlayerBalance({Key? key,this.creator}) : super(key: key);
 final creator;
 
   @override
@@ -105,12 +105,12 @@ class _FirstPlayerBalanceState extends State<FirstPlayerBalance> {
             // ignore: missing_return
             builder: (context,AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (snapshot.hasData) {
-                Map<String, dynamic> documentFields=snapshot.data.data();
-                if(snapshot.data.exists)
+                Map<String, dynamic>? documentFields=snapshot.data!.data() as Map<String, dynamic>?;
+                if(snapshot.data!.exists)
                return ListView(
 
                    children: List.generate(
-                       documentFields['player1'].length,
+                       documentFields!['player1'].length,
                            (index) => Padding(
                          padding: const EdgeInsets.symmetric(
                              horizontal: 60, vertical: 5),
@@ -118,7 +118,7 @@ class _FirstPlayerBalanceState extends State<FirstPlayerBalance> {
                            children: [
                              TableRow(children: [
                                Text(
-                                 "${documentFields['player1'][index]["payer"]}",
+                                 "${documentFields!['player1'][index]["payer"]}",
                                  style: TextStyle(
                                      fontFamily: "Kalam",
 

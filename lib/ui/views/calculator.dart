@@ -12,35 +12,34 @@ import '../giftCard.dart';
 
 class Calculator extends StatefulWidget {
   const Calculator({
-    Key key, this.draggableWidget, this.gameId,
+    Key? key,
+    this.draggableWidget,
+    this.gameId,
   }) : super(key: key);
-final draggableWidget;
-final gameId;
+  final draggableWidget;
+  final gameId;
+
   @override
   _CalculatorState createState() => _CalculatorState();
 }
 
 class _CalculatorState extends State<Calculator>
     with AutomaticKeepAliveClientMixin<Calculator> {
-
-  List<RaisedButton> row1;
-  List<RaisedButton> row2;
-  List<RaisedButton> row3;
-  List<RaisedButton> row4;
-  List<RaisedButton> row5;
-  List row6;
-  List playerRow1;
-  List playerRow2;
-  List<RaisedButton> giftCardRow1;
-  List<RaisedButton> giftCardRow2;
-  List<RaisedButton> giftCardRow3;
+  late List<ElevatedButton> row1;
+  late List<ElevatedButton> row2;
+  late List<ElevatedButton> row3;
+  late List<ElevatedButton> row4;
+  late List<ElevatedButton> row5;
+  late List row6;
+  late List playerRow1;
+  late List playerRow2;
+  late List<ElevatedButton> giftCardRow1;
+  late List<ElevatedButton> giftCardRow2;
+  late List<ElevatedButton> giftCardRow3;
   String decimalPLaces = "";
-  Transactions current;
-  Key key;
+  late Transactions current;
+  Key? key;
 
-
-
-  
   @override
   void initState() {
     super.initState();
@@ -57,119 +56,122 @@ class _CalculatorState extends State<Calculator>
     createRow(omni);
     return Stack(
       children: [
-        Consumer<Omni>(builder: (context,omni,child)
-          {
+        Consumer<Omni>(
+          builder: (context, omni, child) {
             return Container(
               decoration: BoxDecoration(image: buildDecorationImage()),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                          color: Colors.white70,
-                          borderRadius: BorderRadius.circular(10)),
-                      width: MediaQuery.of(context).size.width - 60,
-                      child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "${omni.input != "" ? (omni.input.contains(".") ? double.parse(omni.input).toStringAsFixed(3) : omni.input) : ""}",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  //   fontWeight: FontWeight.w600,
-                                  fontSize: 28,
-                                  fontStyle: FontStyle.normal,
-                                  fontFamily: "Federant"),
-                            ),
-                            Text(
-                              "${omni.currencyPower}",
-                              style: TextStyle(
-                                  color: Colors.black87,
-                                  //   fontWeight: FontWeight.w600,
-                                  fontSize: 28,
-                                  fontStyle: FontStyle.normal,
-                                  fontFamily: "Federant"),
-                            )
-                          ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 20,),
+                    Center(
+                      child: Container(
+                        height: 45,
+                        decoration: BoxDecoration(
+                            color: Colors.white70,
+                            borderRadius: BorderRadius.circular(10)),
+                        width: MediaQuery.of(context).size.width - 60,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "${omni.input != "" ? (omni.input.contains(".") ? double.parse(omni.input).toStringAsFixed(3) : omni.input) : ""}",
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    //   fontWeight: FontWeight.w600,
+                                    fontSize: 28,
+                                    fontStyle: FontStyle.normal,
+                                    fontFamily: "Federant"),
+                              ),
+                              Text(
+                                "${omni.currencyPower}",
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    //   fontWeight: FontWeight.w600,
+                                    fontSize: 28,
+                                    fontStyle: FontStyle.normal,
+                                    fontFamily: "Federant"),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 3 / 5 - 80,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 40),
+                    SizedBox(height: 20,),
+                    FittedBox(
                       child: Column(
                         children: [
                           Row(
                               children: List.generate(
                                   3,
-                                      (index) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: row1[index],
-                                  ))),
+                                  (index) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Container(width:90,height:45,child: row1[index]),
+                                      ))),
                           Row(
                             children: List.generate(
                                 3,
-                                    (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: row2[index],
-                                )),
+                                (index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(width:90,height:45,child: row2[index]),
+                                    )),
                           ),
                           Row(
                             children: List.generate(
                                 3,
-                                    (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: row3[index],
-                                )),
+                                (index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(width:90,height:45,child: row3[index]),
+                                    )),
                           ),
                           Row(
                             children: List.generate(
                                 3,
-                                    (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: row4[index],
-                                )),
+                                (index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(width:90,height:45,child: row4[index]),
+                                    )),
                           ),
                           Row(
                             children: List.generate(
                                 3,
-                                    (index) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: row5[index],
-                                )),
+                                (index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(width:90,height:45,child: row5[index]),
+                                    )),
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: (List.generate(
                                 3,
-                                    (index) => Padding(
+                                (index) => Padding(
                                     padding: const EdgeInsets.all(8),
                                     child: row6[index]))),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 50.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: List.generate(2, (index) => playerRow1[index]),
-                        ),
-                        Row(
-                          children: List.generate(2, (index) => playerRow2[index]),
-                        )
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 50.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(
+                            children:
+                                List.generate(2, (index) => playerRow1[index]),
+                          ),
+                          Row(
+                            children:
+                                List.generate(2, (index) => playerRow2[index]),
+                          )
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(height: 40,)
+                  ],
+                ),
               ),
             );
           },
@@ -177,20 +179,21 @@ class _CalculatorState extends State<Calculator>
         DraggableScrollableSheet(
             minChildSize: 0.08,
             initialChildSize: 0.08,
-            builder: (context,scrollController) {
-              omni.scrollController=scrollController;
+            builder: (context, scrollController) {
+              omni.scrollController = scrollController;
               return TransactionHistory(
-
                   draggableWidget: widget.draggableWidget);
             }),
       ],
     );
   }
 
-  void createRow(Omni  omni) {
+  void createRow(Omni omni) {
     row1 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFFBFDBAE),
+        ),
         onPressed: ((omni.player1.status +
                     omni.player2.status +
                     omni.player3.status +
@@ -231,8 +234,10 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Colors.redAccent,
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+        ),
         onPressed: (omni.player1.status +
                     omni.player2.status +
                     omni.player3.status +
@@ -255,8 +260,8 @@ class _CalculatorState extends State<Calculator>
                     context: context,
                     builder: (context) {
                       return GiftCard(
-                        // setTheState: setTheState,
-                      );
+                          // setTheState: setTheState,
+                          );
                     });
               },
         child: Icon(
@@ -264,8 +269,8 @@ class _CalculatorState extends State<Calculator>
           color: Colors.yellowAccent,
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -313,8 +318,8 @@ class _CalculatorState extends State<Calculator>
     ];
 
     row2 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -350,8 +355,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -387,8 +392,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -427,8 +432,8 @@ class _CalculatorState extends State<Calculator>
     ];
 
     row3 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -464,8 +469,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -501,8 +506,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -541,8 +546,8 @@ class _CalculatorState extends State<Calculator>
     ];
 
     row4 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -578,8 +583,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -615,8 +620,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -654,8 +659,8 @@ class _CalculatorState extends State<Calculator>
       )
     ];
     row5 = [
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                     omni.player2.status +
                     omni.player3.status +
@@ -685,8 +690,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -726,8 +731,8 @@ class _CalculatorState extends State<Calculator>
           style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black87),
         ),
       ),
-      RaisedButton(
-        color: Color(0xFFBFDBAE),
+      ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
         onPressed: (omni.player1.status +
                         omni.player2.status +
                         omni.player3.status +
@@ -799,8 +804,9 @@ class _CalculatorState extends State<Calculator>
                 1)
             ? false
             : true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child:
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
             onPressed: (omni.input == "" || omni.currencyPower == "")
                 ? () {
                     showSimpleNotification(
@@ -851,7 +857,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player1.balance = omni.currencyPower == 'M'
                               ? omni.player1.balance + double.parse(omni.input)
                               : omni.player1.balance +
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player1.balance}");
                           omni.updatePlayer1Passbook(current);
                           omni.input = "";
@@ -875,13 +882,14 @@ class _CalculatorState extends State<Calculator>
                           omni.player2.balance = omni.currencyPower == 'M'
                               ? omni.player2.balance + double.parse(omni.input)
                               : omni.player2.balance +
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
 
                           debugPrint("${omni.player2.balance}");
                           omni.updatePlayer2Passbook(current);
                           omni.input = "";
                           omni.currencyPower = '';
-                          omni.player2.status=0;
+                          omni.player2.status = 0;
                           omni.previousSelectedPlayer = "";
                           omni.pointStatus = false;
                           omni.collector = "";
@@ -900,7 +908,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player3.balance = omni.currencyPower == 'M'
                               ? omni.player3.balance + double.parse(omni.input)
                               : omni.player3.balance +
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player3.balance}");
                           omni.updatePlayer3Passbook(current);
                           omni.input = "";
@@ -924,7 +933,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player4.balance = omni.currencyPower == 'M'
                               ? omni.player4.balance + double.parse(omni.input)
                               : omni.player4.balance +
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player4.balance}");
                           omni.updatePlayer4Passbook(current);
                           omni.input = "";
@@ -958,8 +968,8 @@ class _CalculatorState extends State<Calculator>
                 2)
             ? false
             : true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child: ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
             onPressed: (omni.input == "" || omni.currencyPower == "")
                 ? () {
                     showSimpleNotification(
@@ -1003,20 +1013,22 @@ class _CalculatorState extends State<Calculator>
                         current.payer = "Player 1";
                         setState(() {
                           omni.fundsPayed = omni.currencyPower == 'M'
-                              ? omni.fundsPayed - double.parse(omni.input)
-                              : omni.fundsPayed -
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player1.balance = omni.fundsPayed;
+                              ? omni.fundsPayed! - double.parse(omni.input)
+                              : omni.fundsPayed! -
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player1.balance = omni.fundsPayed!;
                         });
                         break;
                       case "2":
                         current.payer = "Player 2";
                         setState(() {
                           omni.fundsPayed = omni.currencyPower == 'M'
-                              ? omni.fundsPayed - double.parse(omni.input)
-                              : omni.fundsPayed -
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player2.balance = omni.fundsPayed;
+                              ? omni.fundsPayed! - double.parse(omni.input)
+                              : omni.fundsPayed! -
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player2.balance = omni.fundsPayed!;
                         });
 
                         break;
@@ -1024,10 +1036,11 @@ class _CalculatorState extends State<Calculator>
                         current.payer = "Player 3";
                         setState(() {
                           omni.fundsPayed = omni.currencyPower == 'M'
-                              ? omni.fundsPayed - double.parse(omni.input)
-                              : omni.fundsPayed -
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player3.balance = omni.fundsPayed;
+                              ? omni.fundsPayed! - double.parse(omni.input)
+                              : omni.fundsPayed! -
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player3.balance = omni.fundsPayed!;
                         });
 
                         break;
@@ -1035,10 +1048,11 @@ class _CalculatorState extends State<Calculator>
                         current.payer = "Player 4";
                         setState(() {
                           omni.fundsPayed = omni.currencyPower == 'M'
-                              ? omni.fundsPayed - double.parse(omni.input)
-                              : omni.fundsPayed -
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player4.balance = omni.fundsPayed;
+                              ? omni.fundsPayed! - double.parse(omni.input)
+                              : omni.fundsPayed! -
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player4.balance = omni.fundsPayed!;
                         });
 
                         break;
@@ -1050,20 +1064,22 @@ class _CalculatorState extends State<Calculator>
                         current.collector = "Player 1";
                         setState(() {
                           omni.fundsCollected = omni.currencyPower == 'M'
-                              ? omni.fundsCollected + double.parse(omni.input)
-                              : omni.fundsCollected +
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player1.balance = omni.fundsCollected;
+                              ? omni.fundsCollected! + double.parse(omni.input)
+                              : omni.fundsCollected! +
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player1.balance = omni.fundsCollected!;
                         });
                         break;
                       case "2":
                         current.collector = "Player 2";
                         setState(() {
                           omni.fundsCollected = omni.currencyPower == 'M'
-                              ? omni.fundsCollected + double.parse(omni.input)
-                              : omni.fundsCollected +
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player2.balance = omni.fundsCollected;
+                              ? omni.fundsCollected! + double.parse(omni.input)
+                              : omni.fundsCollected! +
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player2.balance = omni.fundsCollected!;
                         });
 
                         break;
@@ -1071,10 +1087,11 @@ class _CalculatorState extends State<Calculator>
                         current.collector = "Player 3";
                         setState(() {
                           omni.fundsCollected = omni.currencyPower == 'M'
-                              ? omni.fundsCollected + double.parse(omni.input)
-                              : omni.fundsCollected +
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player3.balance = omni.fundsCollected;
+                              ? omni.fundsCollected! + double.parse(omni.input)
+                              : omni.fundsCollected! +
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player3.balance = omni.fundsCollected!;
                         });
 
                         break;
@@ -1082,10 +1099,11 @@ class _CalculatorState extends State<Calculator>
                         current.collector = "Player 4";
                         setState(() {
                           omni.fundsCollected = omni.currencyPower == 'M'
-                              ? omni.fundsCollected + double.parse(omni.input)
-                              : omni.fundsCollected +
-                                  double.parse(('.' + decimalPLaces + omni.input));
-                          omni.player4.balance = omni.fundsCollected;
+                              ? omni.fundsCollected! + double.parse(omni.input)
+                              : omni.fundsCollected! +
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
+                          omni.player4.balance = omni.fundsCollected!;
                         });
 
                         break;
@@ -1191,8 +1209,9 @@ class _CalculatorState extends State<Calculator>
                 1)
             ? false
             : true,
-        child: RaisedButton(
-            color: Color(0xFFBFDBAE),
+        child:
+        ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Color(0xFFBFDBAE)),
             onPressed: (omni.input == "" || omni.currencyPower == '')
                 ? () {
                     showSimpleNotification(
@@ -1242,7 +1261,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player1.balance = omni.currencyPower == 'M'
                               ? omni.player1.balance - double.parse(omni.input)
                               : omni.player1.balance -
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player1.balance}");
                           omni.updatePlayer1Passbook(current);
                           omni.input = "";
@@ -1265,7 +1285,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player2.balance = omni.currencyPower == 'M'
                               ? omni.player2.balance - double.parse(omni.input)
                               : omni.player2.balance -
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player2.balance}");
                           omni.updatePlayer2Passbook(current);
                           omni.input = "";
@@ -1289,7 +1310,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player3.balance = omni.currencyPower == 'M'
                               ? omni.player3.balance - double.parse(omni.input)
                               : omni.player3.balance -
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player3.balance}");
                           omni.updatePlayer3Passbook(current);
                           omni.input = "";
@@ -1313,7 +1335,8 @@ class _CalculatorState extends State<Calculator>
                           omni.player4.balance = omni.currencyPower == 'M'
                               ? omni.player4.balance - double.parse(omni.input)
                               : omni.player4.balance -
-                                  double.parse(('.' + decimalPLaces + omni.input));
+                                  double.parse(
+                                      ('.' + decimalPLaces + omni.input));
                           debugPrint("${omni.player4.balance}");
                           omni.updatePlayer4Passbook(current);
                           omni.input = "";
@@ -1344,11 +1367,18 @@ class _CalculatorState extends State<Calculator>
             border: omni.player1.status == 1
                 ? Border.all(color: Colors.black87, style: BorderStyle.solid)
                 : null),
-        child: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          elevation: 8,
-          onPressed: (omni.player2.status + omni.player3.status + omni.player4.status == 2)
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            elevation: 8,
+            primary: omni.player1.status == 1 ? customYellow : Colors.amber.shade500,
+          ),
+          onPressed: (omni.player2.status +
+                      omni.player3.status +
+                      omni.player4.status ==
+                  2)
               ? null
               : (omni.player1.status == 0
                   ? () {
@@ -1360,7 +1390,7 @@ class _CalculatorState extends State<Calculator>
                           omni.fundsPayed = omni.player1.balance;
                         } else {
                           omni.fundsCollected = omni.player1.balance;
-                         omni. collector = "1";
+                          omni.collector = "1";
                         }
 
                         omni.selectedPlayer = "1";
@@ -1373,7 +1403,9 @@ class _CalculatorState extends State<Calculator>
                         if (omni.previousSelectedPlayer == "") {
                           omni.selectedPlayer = "";
                         } else {
-                          omni.selectedPlayer = omni.selectedPlayer=="1"?omni.previousSelectedPlayer:omni.selectedPlayer;
+                          omni.selectedPlayer = omni.selectedPlayer == "1"
+                              ? omni.previousSelectedPlayer
+                              : omni.selectedPlayer;
                           omni.previousSelectedPlayer = "";
                         }
                       });
@@ -1403,7 +1435,6 @@ class _CalculatorState extends State<Calculator>
               ],
             ),
           ),
-          color: omni.player1.status == 1 ? customYellow : Colors.amber.shade500,
         ),
       ),
       Container(
@@ -1412,10 +1443,17 @@ class _CalculatorState extends State<Calculator>
             border: omni.player2.status == 1
                 ? Border.all(color: Colors.black87, style: BorderStyle.solid)
                 : null),
-        child: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          onPressed: (omni.player1.status + omni.player3.status + omni.player4.status == 2)
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            primary: omni.player2.status == 1 ? customRed : Colors.redAccent,
+          ),
+          onPressed: (omni.player1.status +
+                      omni.player3.status +
+                      omni.player4.status ==
+                  2)
               ? null
               : (omni.player2.status == 0
                   ? () {
@@ -1427,7 +1465,7 @@ class _CalculatorState extends State<Calculator>
                           omni.payer = "2";
                         } else {
                           omni.fundsCollected = omni.player2.balance;
-                         omni. collector = "2";
+                          omni.collector = "2";
                         }
 
                         omni.selectedPlayer = "2";
@@ -1439,7 +1477,9 @@ class _CalculatorState extends State<Calculator>
                         if (omni.previousSelectedPlayer == "") {
                           omni.selectedPlayer = "";
                         } else {
-                          omni.selectedPlayer = omni.selectedPlayer=="2"?omni.previousSelectedPlayer:omni.selectedPlayer;
+                          omni.selectedPlayer = omni.selectedPlayer == "2"
+                              ? omni.previousSelectedPlayer
+                              : omni.selectedPlayer;
                           omni.previousSelectedPlayer = "";
                         }
                       });
@@ -1469,7 +1509,6 @@ class _CalculatorState extends State<Calculator>
               ],
             ),
           ),
-          color: omni.player2.status == 1 ? customRed : Colors.redAccent,
         ),
       )
     ];
@@ -1480,10 +1519,19 @@ class _CalculatorState extends State<Calculator>
             border: omni.player3.status == 1
                 ? Border.all(color: Colors.black87, style: BorderStyle.solid)
                 : null),
-        child: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          onPressed: (omni.player1.status + omni.player2.status + omni.player4.status == 2)
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            primary: omni.player3.status == 1
+                ? customGreen
+                : Colors.greenAccent.shade400,
+          ),
+          onPressed: (omni.player1.status +
+                      omni.player2.status +
+                      omni.player4.status ==
+                  2)
               ? null
               : (omni.player3.status == 0
                   ? () {
@@ -1495,7 +1543,7 @@ class _CalculatorState extends State<Calculator>
                           omni.payer = "3";
                         } else {
                           omni.fundsCollected = omni.player3.balance;
-                         omni. collector = "3";
+                          omni.collector = "3";
                         }
 
                         omni.selectedPlayer = "3";
@@ -1507,7 +1555,9 @@ class _CalculatorState extends State<Calculator>
                         if (omni.previousSelectedPlayer == "") {
                           omni.selectedPlayer = "";
                         } else {
-                          omni.selectedPlayer = omni.selectedPlayer=="3"?omni.previousSelectedPlayer:omni.selectedPlayer;
+                          omni.selectedPlayer = omni.selectedPlayer == "3"
+                              ? omni.previousSelectedPlayer
+                              : omni.selectedPlayer;
                           omni.previousSelectedPlayer = "";
                         }
                       });
@@ -1537,8 +1587,6 @@ class _CalculatorState extends State<Calculator>
               ],
             ),
           ),
-          color:
-              omni.player3.status == 1 ? customGreen : Colors.greenAccent.shade400,
         ),
       ),
       Container(
@@ -1547,10 +1595,17 @@ class _CalculatorState extends State<Calculator>
             border: omni.player4.status == 1
                 ? Border.all(color: Colors.black87, style: BorderStyle.solid)
                 : null),
-        child: RaisedButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          onPressed: (omni.player1.status + omni.player2.status + omni.player3.status == 2)
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            primary: omni.player4.status == 1 ? customBlue : Colors.blue,
+          ),
+          onPressed: (omni.player1.status +
+                      omni.player2.status +
+                      omni.player3.status ==
+                  2)
               ? null
               : (omni.player4.status == 0
                   ? () {
@@ -1562,7 +1617,7 @@ class _CalculatorState extends State<Calculator>
                           omni.payer = "4";
                         } else {
                           omni.fundsCollected = omni.player4.balance;
-                         omni. collector = "4";
+                          omni.collector = "4";
                         }
 
                         omni.selectedPlayer = "4";
@@ -1574,7 +1629,9 @@ class _CalculatorState extends State<Calculator>
                         if (omni.previousSelectedPlayer == "") {
                           omni.selectedPlayer = "";
                         } else {
-                          omni.selectedPlayer = omni.selectedPlayer=="4"?omni.previousSelectedPlayer:omni.selectedPlayer;
+                          omni.selectedPlayer = omni.selectedPlayer == "4"
+                              ? omni.previousSelectedPlayer
+                              : omni.selectedPlayer;
                           omni.previousSelectedPlayer = "";
                         }
                       });
@@ -1604,7 +1661,6 @@ class _CalculatorState extends State<Calculator>
               ],
             ),
           ),
-          color: omni.player4.status == 1 ? customBlue : Colors.blue,
         ),
       )
     ];
@@ -1615,14 +1671,10 @@ class _CalculatorState extends State<Calculator>
         image: AssetImage("images/monopoly.jpg"), fit: BoxFit.fill);
   }
 
-
-
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 }
-
-
 
 //500k,250k,100k,200k,1M,2M,150k,1.5M,
 //1M,2M,1.5M,

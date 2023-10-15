@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'homePage.dart';
 
 Future endGameDialog(BuildContext context,bool creator,var gameId) {
+
   return showDialog(
       context: context,
       builder: (context) {

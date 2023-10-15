@@ -12,18 +12,18 @@ class Omni extends ChangeNotifier{
   Account player3 = Account(name: "player3", status: 0, balance: 15);
   Account player4 = Account(name: "player4", status: 0, balance: 15);
   History history = History();
-  ScrollController scrollController;
+  ScrollController? scrollController;
   String selectedPlayer = "";
   String previousSelectedPlayer = "";
   String currencyPower = "";
   String payer = "", collector = "";
-  double fundsPayed, fundsCollected;
+  double? fundsPayed, fundsCollected;
   String input = "";
   List<Map> player1Data=[];
   List<Map> player2Data=[];
   List<Map> player3Data=[];
   List<Map> player4Data=[];
-  Map currentTransaction;
+  Map? currentTransaction;
   var currentGameID;
 
 
@@ -32,7 +32,7 @@ class Omni extends ChangeNotifier{
 
  updatePlayer1Passbook(Transactions transaction)
   { currentTransaction={'payer':transaction.payer,'collector':transaction.collector,'amount':transaction.amount,'currencyPower':currencyPower};
-    player1Data.add(currentTransaction);
+    player1Data.add(currentTransaction!);
     FirebaseFirestore.instance.collection("games").doc(currentGameID).update({'player1':player1Data});
     player1.passBook.add(transaction);
     notifyListeners();
@@ -41,7 +41,7 @@ class Omni extends ChangeNotifier{
    updatePlayer2Passbook(Transactions transaction)
   {
     currentTransaction={'payer':transaction.payer,'collector':transaction.collector,'amount':transaction.amount,'currencyPower':currencyPower};
-    player2Data.add(currentTransaction);
+    player2Data.add(currentTransaction!);
     FirebaseFirestore.instance.collection("games").doc(currentGameID).update({'player2':player2Data});
     player2.passBook.add(transaction);
 
@@ -51,7 +51,7 @@ class Omni extends ChangeNotifier{
    updatePlayer3Passbook(Transactions transaction)
   {
     currentTransaction={'payer':transaction.payer,'collector':transaction.collector,'amount':transaction.amount,'currencyPower':currencyPower};
-    player3Data.add(currentTransaction);
+    player3Data.add(currentTransaction!);
     FirebaseFirestore.instance.collection("games").doc(currentGameID).update({'player3':player3Data});
     player3.passBook.add(transaction);
     notifyListeners();
@@ -59,7 +59,7 @@ class Omni extends ChangeNotifier{
 
    updatePlayer4Passbook(Transactions transaction)
   {currentTransaction={'payer':transaction.payer,'collector':transaction.collector,'amount':transaction.amount,'currencyPower':currencyPower};
-  player4Data.add(currentTransaction);
+  player4Data.add(currentTransaction!);
   FirebaseFirestore.instance.collection("games").doc(currentGameID).update({'player4':player4Data});
     player4.passBook.add(transaction);
     notifyListeners();

@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoly_bank/ui/tabBarView.dart';
 import 'package:monopoly_bank/util/global%20variables.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -19,7 +18,7 @@ class _HomePageState extends State<HomePage> {
 
   final Color foregroundColor = Colors.white;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  String gameId;
+  String? gameId;
   var gameDocument;
 
   @override
@@ -44,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                       cursorColor: Color(0xFFBFDBAE),
                       maxLength: 6,
                       validator: (value) {
-                        if (value.isEmpty || value.length < 6) {
+                        if (value!.isEmpty || value.length < 6) {
                           return 'Enter a valid Game ID';
                         }
                       },
@@ -76,28 +75,32 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         children: <Widget>[
                           Expanded(
-                            child: FlatButton(
+                            child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  vertical: 20.0, horizontal: 20.0),
-                              color: customGreen,
-                              onPressed: () async {
-                                if (formKey.currentState.validate()) {
-                                  gameDocument = await FirebaseFirestore.instance
-                                      .collection("games")
-                                      .doc(gameId)
-                                      .get();
-                                  if (gameDocument.exists) {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return TabBarList(creator: false,gameId: gameId,);
-                                    }));
-                                  } else
-                                    showMessage();
-                                }
-                              },
-                              child: Text(
-                                "Join",
-                                style: TextStyle(color: this.foregroundColor,fontFamily: "OpenSans",letterSpacing: 3,fontWeight: FontWeight.bold),
+                              vertical: 20.0, horizontal: 20.0),
+                              child: Container(
+                                color: customGreen,
+                                child: TextButton(
+                                  onPressed: () async {
+                                    if (formKey.currentState!.validate()) {
+                                      gameDocument = await FirebaseFirestore.instance
+                                          .collection("games")
+                                          .doc(gameId)
+                                          .get();
+                                      if (gameDocument.exists) {
+                                        Navigator.push(context,
+                                            MaterialPageRoute(builder: (context) {
+                                          return TabBarList(creator: false,gameId: gameId,);
+                                        }));
+                                      } else
+                                        showMessage();
+                                    }
+                                  },
+                                  child: Text(
+                                    "Join",
+                                    style: TextStyle(color: this.foregroundColor,fontFamily: "OpenSans",letterSpacing: 3,fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -117,20 +120,21 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: FlatButton(
+                  child: Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 10.0),
                     color: customGreen,
-                    onPressed: ()  {
+                    child:TextButton(onPressed: ()  {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
                             return TabBarList(creator: true);
                           }));
                     },
-                    child: Text(
-                      "create",
-                      style: TextStyle(color: this.foregroundColor,fontSize: 20,fontFamily: "OpenSans",letterSpacing: 2),
-                    ),
+                      child: Text(
+                        "create",
+                        style: TextStyle(color: this.foregroundColor,fontSize: 20,fontFamily: "OpenSans",letterSpacing: 2),
+                      ),)
+
                   ),
                 ),
               ],

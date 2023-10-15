@@ -9,7 +9,7 @@ import 'package:monopoly_bank/ui/endDialog.dart';
 import 'package:provider/provider.dart';
 
 class ThirdPlayerBalance extends StatefulWidget {
-  const ThirdPlayerBalance({Key key, this.creator}) : super(key: key);
+  const ThirdPlayerBalance({Key? key, this.creator}) : super(key: key);
 final creator;
 
   @override
@@ -104,12 +104,12 @@ class _ThirdPlayerBalanceState extends State<ThirdPlayerBalance> {
                 stream: game,
                 builder: (context,AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (snapshot.hasData) {
-                    Map<String, dynamic> documentFields=snapshot.data.data();
-                    if(snapshot.data.exists)
+                    Map<String, dynamic>? documentFields=snapshot.data!.data() as Map<String,dynamic>?;
+                    if(snapshot.data!.exists)
                   return  ListView(
 
                         children: List.generate(
-                            documentFields['player3'].length,
+                            documentFields!['player3'].length,
                                 (index) => Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 60, vertical: 5),

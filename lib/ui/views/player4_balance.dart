@@ -1,14 +1,11 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoly_bank/model/Omnipotent%20data.dart';
-import 'package:monopoly_bank/ui/endDialog.dart';
 import 'package:provider/provider.dart';
 
 class FourthPlayerBalance extends StatefulWidget {
-  const FourthPlayerBalance({Key key, this.creator}) : super(key: key);
+  const FourthPlayerBalance({Key? key, this.creator}) : super(key: key);
 
   final creator;
 
@@ -97,12 +94,12 @@ class _FourthPlayerBalanceState extends State<FourthPlayerBalance> {
               stream: game,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  Map<String, dynamic> documentFields = snapshot.data.data();
+                  Map<String, dynamic>? documentFields = snapshot.data!.data() as Map<String, dynamic>?;
 
-if(snapshot.data.exists)
+if(snapshot.data!.exists)
                   return ListView(
                       children: List.generate(
-                          documentFields['player4'].length,
+                          documentFields!['player4'].length,
                           (index) => Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 60, vertical: 5),

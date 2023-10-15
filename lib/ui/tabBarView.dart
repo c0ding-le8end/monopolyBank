@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoly_bank/ui/endDialog.dart';
-import 'package:monopoly_bank/ui/homePage.dart';
 import 'package:monopoly_bank/ui/views/calculator.dart';
 import 'package:monopoly_bank/ui/views/player1_balance.dart';
 import 'package:monopoly_bank/ui/views/player2_balance.dart';
@@ -18,8 +17,8 @@ import 'package:provider/provider.dart';
 import 'endgame.dart';
 
 class TabBarList extends StatefulWidget {
-  const TabBarList({Key key, this.creator, this.gameId}) : super(key: key);
-  final bool creator;
+  const TabBarList({Key? key, this.creator, this.gameId}) : super(key: key);
+  final bool? creator;
   final gameId;
 
   @override
@@ -32,7 +31,7 @@ class _TabBarListState extends State<TabBarList>
     with AutomaticKeepAliveClientMixin<TabBarList> {
   var gameId;
 
-  Widget alertDialog;
+  Widget? alertDialog;
 
 
 
@@ -41,7 +40,7 @@ class _TabBarListState extends State<TabBarList>
   Widget build(BuildContext context) {
     gameId = widget.gameId;
     var omni = Provider.of<Omni>(context,listen: false);
-    if (widget.creator) {
+    if (widget.creator!) {
       gameId = Random().nextInt(99999) + 100000;
       omni.currentGameID = gameId.toString();
       FirebaseFirestore.instance
@@ -108,6 +107,7 @@ class _TabBarListState extends State<TabBarList>
 
       return WillPopScope(onWillPop: ()async{
         await endGameDialog(context, true, gameId);
+        return false;
       },
         child: DefaultTabController(
             initialIndex: 0,
@@ -119,8 +119,8 @@ class _TabBarListState extends State<TabBarList>
               ),
                 actions: [
                   TextButton(
-                      onPressed: () {
-                        return endGameDialog(context,widget.creator,gameId);
+                      onPressed: () async{
+                         await endGameDialog(context,widget.creator!,gameId);
                         FirebaseFirestore.instance
                             .collection("games")
                             .doc(gameId.toString())
@@ -201,11 +201,11 @@ class _TabBarListState extends State<TabBarList>
       FirebaseFirestore.instance.collection("games").doc(gameId.toString()).snapshots()..listen((event) {if(!event.exists)
       {
         endDialog(context);
-
       }
       });
       return WillPopScope(onWillPop: ()async{
         await endGameDialog(context, false, gameId);
+        return false;
       },
         child: DefaultTabController(
             initialIndex: 0,
@@ -216,12 +216,9 @@ class _TabBarListState extends State<TabBarList>
                 child: Container(child: Text("$gameId"),),
               ),actions: [
                 TextButton(
-                    onPressed: () {
-                      return endGameDialog(context,widget.creator,gameId);
-                      FirebaseFirestore.instance
-                          .collection("games")
-                          .doc(gameId.toString())
-                          .delete();
+                    onPressed: () async{
+                       await endGameDialog(context,widget.creator!,gameId);
+
                       Navigator.pop(context);
                     },
                     child: Row(
